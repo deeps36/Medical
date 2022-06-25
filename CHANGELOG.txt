@@ -1,0 +1,17 @@
+[1.0.0] 2021-12-23
+
+ADDED
+
+* Bulk import data
+* Bulk export data
+
+Change
+
+* UI change
+* Service update
+
+[1.0.1] 2022-01-11
+
+Fixed
+
+* Add Language Query

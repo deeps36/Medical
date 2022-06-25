@@ -1,0 +1,32 @@
+
+1. User
+	- User Management
+	- Profile
+	- Login/Logout
+2. Schemes
+	- Configuration
+	- Search
+	- Dynamic Form
+	- Schemes list
+	- Broad Head management
+3. Data Entry
+	- Get Data from App (Sync)
+	- Data entry using base data (SECC)
+	- Update Ind/HH
+	- New data entry (for missing/new records)
+4. Reports
+	- State wise
+	- District wise
+	- Block wise
+	- Panchayat wise
+	- Village wise
+	- Report indicators filtering
+	- Report automation (Scheduling)
+5. Dashboard
+	- Enterprise level UI changes
+	- Dashboard management
+6. GIS
+	- Map view
+	- Report view
+7. General
+	- State, Block, Panchayat, Village list

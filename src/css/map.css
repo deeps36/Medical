@@ -1,0 +1,261 @@
+.mapContainer{
+	width: 100%;
+	height: 600px;
+	position: relative;
+	border: 1px solid #d0d0d0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
+}
+.mapOverlay{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+.mapOverlay .component{
+	padding: 13px 15px;
+}
+.map-icon{
+	position: absolute;
+	z-index: 100;
+	right: 2rem;;
+}
+#layerSwitcherWrapper{
+	font-size: 0.9rem;
+	/* padding: 10px 0; */
+	text-align: center;
+}
+#layerSwitcherWrapper .accordion-content{
+	border: 0;
+}
+#layerSwitcherWrapper :last-child > .accordion-content:last-child{
+	border: 0;
+}
+#layerSwitcherWrapper .accordion-title{
+	padding: 15px;
+	color: #404040;
+}
+#tertiaryCategoryLayers div{
+	padding: 5px 10px;
+	border-radius: 3px;
+}
+#GISDashboardCategoriesContainer{
+	margin-bottom: 0;
+}
+#mainCategory ul,#subCategory ul,#tertiaryCategory ul,#tertiaryCategoryLayers ul{
+	list-style: none;
+	margin: 0;
+}
+#mainCategory ul li,#subCategory ul li,#tertiaryCategory ul li,#tertiaryCategoryLayers ul li{
+	padding: 5px 10px;
+	background-color: #ffffff;
+	border-radius: 2px;
+	cursor: pointer;
+	margin-bottom: 4px;
+	border: 1px solid #dcdcdc;
+}
+#mainCategory ul li:hover,#subCategory ul li:hover,#tertiaryCategory ul li:hover,#tertiaryCategoryLayers ul li:hover{
+	background-color: #e0e0e0;
+}
+#mainCategory ul li.selected,#subCategory ul li.selected,#tertiaryCategory ul li.selected,#tertiaryCategoryLayers ul li.selected{
+	background-color: #CFD4D7;
+}
+#layerSwitcherWrapper .layer-switcher-block{
+	border-right: 1px solid #e8e8e8;
+	/* margin: 2px; */
+	/* border-radius: 3px; */
+	padding: 5px 7px;
+	text-align: left;
+}
+#mainCategory{
+	margin-bottom: 10px;
+}
+#subCategory,#tertiaryCategory,#tertiaryCategoryLayers{
+	height: 215px;
+	overflow-y: auto;
+}
+.layer-switcher-block::-webkit-scrollbar-track
+{
+	webkit-box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.25);
+	background-color: #efefef;
+}
+.layer-switcher-block::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: rgb(245, 245, 245);
+}
+.layer-switcher-block::-webkit-scrollbar-thumb
+{
+	background-color: #637382;
+	border: 0 solid #000000;
+}
+.layerSwitcherTitle{
+	background-color: #374560 !important;
+	color: #f3f3f3;
+}
+.selectionOverlay {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	color: #fff;
+	padding: 5px;
+	z-index: 10;
+	font-size: 0.87em;
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+.menu_icon {
+	box-shadow: none;
+}
+.menu_icon .child {
+	float: left;
+	height: 35px;
+	width: 45px;
+	text-align: center;
+	padding:5px;
+	display: inline-block;
+	margin-right: 2px;
+	background-color: #262824;
+	padding: 5px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.menu_icon .child img{
+	width: auto;
+	height: 100%;
+}
+.menu_icon .child.active{
+	ackground-color: #fff;
+	color: #000;
+}
+.layer-row{
+	margin: 0.2rem 0;
+	background-color: rgb(213, 227, 236);
+	padding: 0.3rem 0.6rem;
+}
+#AddedLayerPanel .slider{
+	margin: 0.5rem 1rem 0 1rem;
+}
+#AddedLayerPanel .slider-handle{
+	width: 0.8rem;
+	height: 1.2rem;
+}
+#AddedLayerPanel .slider-fill{
+	height: 0.4rem;
+}
+#Legends
+{
+	background-color: rgba(255, 255, 255, 0.75);
+	color: #000;
+	position: absolute;
+	right: 5px;
+	bottom: 0;
+	display: block;
+	z-index: 1000;
+	width: 40%;
+	text-align: left;
+	max-width: 300px;
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+#legendContent{
+	padding: 0.3rem 0.6rem;
+	overflow-y: auto;
+	height: 250px;
+	display: block;
+}
+#legendContent::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+}
+#legendContent::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9);*/
+	*
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.37);
+    background-color: #ffffff;
+}
+#legendContent::-webkit-scrollbar-thumb {
+  *
+  background-color: rgba(74, 74, 74, 0.99);
+  background-color: rgba(11, 33, 53, 0.37);
+  border: 1px solid #a0a1a2;
+  /* outline: 0px solid #bbb; */
+}
+#legendTitleBar{
+	background: #262824;
+	color: #fff;
+	text-align: left;
+	width: 100%;
+	cursor: pointer;
+	padding: 2px 0 2px 7px;
+	font-size: 0.83rem;
+}
+#bottomOverlay{
+	position: absolute;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.3);
+	color: #fff;
+	padding-left: 110px;
+	z-index: 100;
+	width: 100%;
+	text-align: left;
+	box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+#latlonInfo{
+	margin-right: 10px;
+	font-size: 0.74em;
+	display: inline-block;
+}
+.legendRowTitle{
+	font-size: 0.84rem;
+	margin: 0.5rem 0 0.2rem;
+}
+#layerSwitcherModal .close-button{
+	color: #e0e0e0;
+}
+.featureinfo-popup{
+	background-color: rgba(255, 255, 255, 0.9);
+	color: #000;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	display: none;
+	z-index: 1005;
+	text-align: left;
+	padding: 0;
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+	border: 1px solid rgba(1, 44, 72, 0.73);
+}
+#featureInfoContent{
+	overflow: auto;
+	max-height: 200px;
+}
+.featureinfo-popup h6.barTitle{
+	margin: 0;
+	background-color: #305a75;
+	color: #e6e6e6;
+	font-size: 0.87rem;
+	padding: 10px;
+}
+.featureinfo-popup .close-button{
+	color: #e6e6e6;
+}
+
+.reveal{
+	box-shadow: rgb(10, 51, 88) 1px 2px 10px;
+	border: 1px solid rgb(208, 208, 208) !important;
+}
+.reveal-overlay{
+	background-color: rgba(0, 0, 0, 0.01);
+}
+.legend-color{
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	height: 1.7rem;
+	margin-bottom: 0.7rem;
+}
