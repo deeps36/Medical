@@ -20,7 +20,7 @@
                                 <div class="d-flex justify-content-center align-items-center">
                                     <span class="date-text">July 12 to 18, 2022</span>
 
-                                    <span class="location-text">Atmiya Vidhya Dham, Bakrol</span>
+                                    <span class="location-text">Atmiya Vidhya Dham, Vidhyanagar</span>
                                 </div>
 
                                 <a href="#section_2" class="custom-link bi-arrow-down arrow-icon"></a>

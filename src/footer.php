@@ -4,9 +4,9 @@
 
                     <div class="col-lg-12 col-12 border-bottom pb-5 mb-5">
                         <div class="d-flex">
-                            <a href="index.html" class="navbar-brand">
+                            <a href="/../../index.php" class="navbar-brand">
                                 <i class="bi-bullseye brand-logo"></i>
-                                <span class="brand-text">Global Scholars League</span>
+                                <span class="brand-text">Global Scholars <br> League</span>
                             </a>
 
                             <ul class="social-icon ms-auto">

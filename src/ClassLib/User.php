@@ -83,6 +83,11 @@ class User extends GeetMain
 		$this->redirect("/");
 	}
 
+	function getRegisterresi()
+	{	
+		include __DIR__."/../Views/Home/sign-up-resident.php";
+	}
+
 	function getRegister()
 	{	
 		include __DIR__."/../Views/Home/sign-up.php";
