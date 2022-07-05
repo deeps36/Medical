@@ -26,27 +26,31 @@
 	<body>
 	<nav class="navbar navbar-expand-lg">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> -->
 
-                <a href="/../../index.php" class="navbar-brand mx-auto mx-lg-0">
+                <a href="/../../index.php" class="navbar-brand mx-auto mx-lg-0" >
                     <i class="bi-bullseye brand-logo"></i>
-                    <span class="brand-text">Global Scholars League <br> Paper Publication</span>
+                    <span class="brand-logo">GSL </span>
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_1">Home</a>
+                            <a class="nav-link" href="/../../index.php">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">About</a>
+                            <a class="nav-link" href="/User/getDashboard">Dashboard</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_7">Contact</a>
+                            <a class="nav-link" href="">About</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Contact</a>
                         </li>
 
                         <li class="nav-item">

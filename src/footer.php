@@ -1,12 +1,12 @@
-<footer class="site-footer">
+<footer class="site-footer" style="background-color: #273053;">
             <div class="container">
                 <div class="row align-items-center">
 
                     <div class="col-lg-12 col-12 border-bottom pb-5 mb-5">
                         <div class="d-flex">
-                            <a href="index.html" class="navbar-brand">
+                            <a href="/../../index.php" class="navbar-brand">
                                 <i class="bi-bullseye brand-logo"></i>
-                                <span class="brand-text">Global Scholars League</span>
+                                <span class="brand-text">GSL</span>
                             </a>
 
                             <ul class="social-icon ms-auto">
@@ -36,11 +36,11 @@
                         
                     <div class="col-lg-5 col-12 ms-lg-auto">
                         <div class="copyright-text-wrap d-flex align-items-center">
-                            <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2022 Leadership Event Co., Ltd. 
+                            <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2022 companyName, Ltd. 
                             
                             <br>All Rights Reserved. 
           
-          					<br><br>Design: <a title="CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+          					<!-- <br><br>Design: <a title="CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p> -->
 
                             <a href="#section_1" class="bi-arrow-up arrow-icon custom-link"></a>
                         </div>

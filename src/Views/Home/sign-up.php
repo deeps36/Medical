@@ -37,18 +37,18 @@
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Authentication - Sign-up -->
-			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(/metronic8/demo2/assets/media/illustrations/sigma-1/14.png">
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" >
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
-					<a href="/../../index.php" class="mb-12">
+					<!-- <a href="/../../index.php" class="mb-12">
 						<img alt="Logo" src="/image/logo-gsl.png" class="h-40px" /><label><h4>Global Scholars League</h4></label>
-					</a>
+					</a> -->
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
 					<div class="w-lg-900px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-80" novalidate="novalidate" id="kt_sign_up_form">
+						<form class="form w-80"  method="post" action="/User/postNewUser" enctype="multipart/form-data">
 							<!--begin::Heading-->
 							<div class="mb-10 text-center">
 								<!--begin::Title-->
@@ -56,7 +56,7 @@
 								<!--end::Title-->
 								<!--begin::Link-->
 								<div class="text-gray-400 fw-bold fs-4">Already have an account? 
-								<a href="/View/Home/sign-in.php" class="link-primary fw-bolder">Sign in here</a></div>
+								<a href="/User/getLogin" class="link-primary fw-bolder">Sign in here</a></div>
 								<!--end::Link-->
 							</div>
 							<!--end::Heading-->
@@ -76,13 +76,13 @@
 								<!--begin::Col-->
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">First Name *</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" />
 								</div>
 								<!--end::Col-->
 								<!--begin::Col-->
 								<div class="col-xl-6">
 									<label class="form-label fw-bolder text-dark fs-6">Last Name *</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" />
 								</div>
 								<!--end::Col-->
 							</div>
@@ -115,21 +115,21 @@
 							
 							<div class="fv-row mb-12">
 								<label class="form-label fw-bolder text-dark fs-6">Medical School *</label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="school" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="medical_school" autocomplete="off" />
 							</div>
 							<div class="row fv-row mb-7">
 								<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Degree Certificate *</label>
-										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
+										<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="degree_certificate" autocomplete="off" />
 								</div>
 								<div class="col-xl-6">
 										<label class="form-label fw-bolder text-dark fs-6">Year of Graduation *</label>
-										<input class="form-control form-control-lg form-control-solid" type="number" placeholder="" name="graduation" autocomplete="off" />
+										<input class="form-control form-control-lg form-control-solid" type="number" placeholder="" name="year_graduation" autocomplete="off" />
 								</div>
 							</div>
 							<div class="fv-row mb-6">
 								<label class="form-label fw-bolder text-dark fs-6">USMLE Details *</label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="usmle" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="usmle_detail" autocomplete="off" />
 							</div>
 							<div class="row fv-row mb-12">
 								<div class="col-xl-6">
@@ -155,7 +155,7 @@
 							</div>
 							<div class="fv-row mb-6">
 									<label class="form-label fw-bolder text-dark fs-6">Speciality of Interest *</label>
-									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="phone" autocomplete="off" />
+									<input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="speciality_of_instrest" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
@@ -210,7 +210,7 @@
 							<!--end::Input group-->
 							<!--begin::Actions-->
 							<div class="text-center">
-								<button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
+								<button type="submit" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
 									<span class="indicator-label">Submit</span>
 									<span class="indicator-progress">Please wait... 
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

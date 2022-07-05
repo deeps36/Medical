@@ -55,8 +55,22 @@ class User extends GeetMain
 	}
 
 	function getLogin()
-	{	
+	{			
 		include __DIR__."/../Views/Home/sign-in.php";
+	}
+	function postLogin(){
+		$user = 'test@gmail.com';
+		$password = 'test123';
+		$result = $this->dbase->login($user,$password);
+		if($result['responseType'] == 1){
+			$this->redirect("/GeetMain/Home");
+		}
+		else{
+
+		}
+	}
+	function getDashboard(){
+		include __DIR__."/../Views/Dashboard/getDashboard.php";
 	}
 
 	function getLogout()
@@ -86,10 +100,6 @@ class User extends GeetMain
 	function getRegister()
 	{	
 		include __DIR__."/../Views/Home/sign-up.php";
-	}
-	
-	function getLoginMobile(){
-		include __DIR__."/../../View/Home/sign-up.php";
 	}
 	
 	function getLogoutMobile(){
@@ -154,137 +164,72 @@ class User extends GeetMain
 		include __DIR__."/../Views/User/admin_dashboard.php";
 	}
 
-	function getAccessPolicy()
-	{
-		$role_id = isset($_GET['role_id']) ? $_GET['role_id'] : 0;
-		$this->class = array('User', 'AdminHierarchy', 'Contact', 'Faq', 'Tools', 'Label', 'Language', 'Api','Import', 'Sync', 'Question');
-		$roles = $this->dbase->getAllRoles();
+	// function getAccessPolicy()
+	// {
+	// 	$role_id = isset($_GET['role_id']) ? $_GET['role_id'] : 0;
+	// 	$this->class = array('User', 'AdminHierarchy', 'Contact', 'Faq', 'Tools', 'Label', 'Language', 'Api','Import', 'Sync', 'Question');
+	// 	$roles = $this->dbase->getAllRoles();
 		
-		if($roles['responseType'] === false)
-		{
-			echo "Display Centralized error page here with system errors";exit;
-			// show error page
-		}
-		if(isset($_POST['policyData'])){
-			$this->dbase->updateAccessPolicy($_POST['policyData'], $_POST['role']);
-			$_SESSION['message']['success'] = "Access policy updated successfully";
-		}
+	// 	if($roles['responseType'] === false)
+	// 	{
+	// 		echo "Display Centralized error page here with system errors";exit;
+	// 		// show error page
+	// 	}
+	// 	if(isset($_POST['policyData'])){
+	// 		$this->dbase->updateAccessPolicy($_POST['policyData'], $_POST['role']);
+	// 		$_SESSION['message']['success'] = "Access policy updated successfully";
+	// 	}
 
-		$roleAccessPolicy = array();
-		if($role_id != 0 && is_numeric($role_id)) {
-			$currentPolicy = $this->dbase->getUserSpecificAccessPolicy($role_id);
-			if($currentPolicy['responseType'] === '1') {
-				$roleAccessPolicy = explode(",", $currentPolicy['text'][0]['accesspolicy']);
-			}
-		}
+	// 	$roleAccessPolicy = array();
+	// 	if($role_id != 0 && is_numeric($role_id)) {
+	// 		$currentPolicy = $this->dbase->getUserSpecificAccessPolicy($role_id);
+	// 		if($currentPolicy['responseType'] === '1') {
+	// 			$roleAccessPolicy = explode(",", $currentPolicy['text'][0]['accesspolicy']);
+	// 		}
+	// 	}
 
 		
-		$fetched = array();
-		foreach($this->class as $value)
-		{
-		   $absClass = "FES\GEET\ClassLib\\".$value;
-		   $obj = new $absClass(false);
-		   $all_methods = get_class_methods($obj);
-		   $cleaned = array_filter($all_methods, function ($var) { 
-			   	switch ($var) {
-			   		case stripos($var, 'admin'):
-			   			return $var;
-			   		case stripos($var, 'get'):
-			   			return $var;
-		   			case stripos($var, 'post'):
-			   			return $var;
-			   		case stripos($var, 'delete'):
-			   			return $var;
-		   			case stripos($var, 'update'):
-			   			return $var;
-			   	}	
-		   });
-		   $fetched[$value] = $cleaned;
+	// 	$fetched = array();
+	// 	foreach($this->class as $value)
+	// 	{
+	// 	   $absClass = "FES\GEET\ClassLib\\".$value;
+	// 	   $obj = new $absClass(false);
+	// 	   $all_methods = get_class_methods($obj);
+	// 	   $cleaned = array_filter($all_methods, function ($var) { 
+	// 		   	switch ($var) {
+	// 		   		case stripos($var, 'admin'):
+	// 		   			return $var;
+	// 		   		case stripos($var, 'get'):
+	// 		   			return $var;
+	// 	   			case stripos($var, 'post'):
+	// 		   			return $var;
+	// 		   		case stripos($var, 'delete'):
+	// 		   			return $var;
+	// 	   			case stripos($var, 'update'):
+	// 		   			return $var;
+	// 		   	}	
+	// 	   });
+	// 	   $fetched[$value] = $cleaned;
 		   
-		}
-		include __DIR__."/../Views/User/admin_access_policy.php";
-	}
+	// 	}
+	// 	include __DIR__."/../Views/User/admin_access_policy.php";
+	// }
 
 	function getNewAdminUser()
 	{
-		$action = "/user/postNewUser";
-		$roles = $this->dbase->getAllRoles();
-		$organizations = $this->dbase->getOrganizations($_SESSION['userid'], $_SESSION['super_admin']);
-		$_SESSION['salt_register'] = CryptoLib::generateSalt();
-		include __DIR__."/../Views/User/admin_register.php";		
+		// $action = "/user/postNewUser";
+		// $roles = $this->dbase->getAllRoles();
+		// $organizations = $this->dbase->getOrganizations($_SESSION['userid'], $_SESSION['super_admin']);
+		// $_SESSION['salt_register'] = CryptoLib::generateSalt();
+		// include __DIR__."/../Views/User/admin_register.php";		
 	}
 
 	function postNewUser() {
 		if(!empty($_POST)) {
 
-			/*foreach($_POST as $key => $value) {
-				if(is_array($value)) continue;
-				if(empty($value)){
-					$label = ucwords(str_replace('_', ' ', $key));
-					$_SESSION['message']['alert'] = $label." cannot be blank";
-					$this->redirect($_SERVER['HTTP_REFERER']);
-				}
-			}
-
-			echo "<pre>";
-			print_r($_POST); exit;*/
-
-			if(!isset($_SESSION["salt_register"])){
-				$_SESSION['message']['warning'] = "Access Denied: Malicious attempt found.";
-				$this->redirect("/#login");
-			}
-
-			$email = $_POST['email'];
-			$user_id = $_POST['user_id'];
-
-			$result = $this->dbase->checkEmailExists($email);
-			if($result['text'][0]['total_rows'] != 0) {
-				$_SESSION['message']['alert'] = "Error: provided email address is already registered. - ".$email;
-				$this->redirect($_SERVER['HTTP_REFERER']);
-			}
-
-			$result = $this->dbase->checkUserIdExists($user_id);
-			if($result['text'][0]['total_rows'] != 0) {
-				$_SESSION['message']['alert'] = "Error: provided user id is already registered. - ".$user_id;
-				$this->redirect($_SERVER['HTTP_REFERER']);
-			}
-
-			// decrypt new password
-			$password = $this->utils->cryptoJsAesDecrypt($_SESSION["salt_register"], $_POST['password']);
-			$confirm_password = $this->utils->cryptoJsAesDecrypt($_SESSION["salt_register"], $_POST['confirm_password']);
-			unset($_SESSION["salt_register"]);
-
-			if($password === null){
-				if(isset($_SESSION['maliciousAttempt'])){
-				 	$_SESSION['maliciousAttempt']++;
-					if ($_SESSION['maliciousAttempt'] >= 5){
-						$this->dbase->blockUser($data['username'], time());
-						$_SESSION['message']['warning'] = "User's account is temporarily blocked due to multiple malicious attempts";
-						$this->redirect($_SERVER['HTTP_REFERER']);
-					}
-				} else {
-					$_SESSION['maliciousAttempt'] = 1;
-				}
-				$_SESSION['message']['warning'] = "Access Denied: Malicious attempt found.";
-				$this->redirect($_SERVER['HTTP_REFERER']);	
-
-			}
-
-			if($password !== $confirm_password){
-				$_SESSION['message']['alert'] = "Password and Confirm password fields are not matching. No user created. Please register the user again and save.";
-				$this->redirect($_SERVER['HTTP_REFERER']);	
-				exit;
-			}
-
-			// Validate password strength
-			$response = $this->utils->checkPasswordStrength($password);
-			if($response['type'] !== "1"){
-				$_SESSION['message']['alert'] = "Error: ".$response['text'];
-				$this->redirect($_SERVER['HTTP_REFERER']);
-			}
-			if($_POST('medical')){
-				$name = $_POST['name'];
-				$password = CryptoLib::hash($password, $this->salt);
+			// if($_POST('medical')){
+				$name = $_POST['first_name'];
+				$password = $_POST['password'];
 				//$password = $_POST['password'];
 				$city = $_POST['city'];
 				$state = $_POST['state'];
@@ -292,59 +237,26 @@ class User extends GeetMain
 				$medicalSchool = $_POST['medical_school'];
 				$degreeCertificate = $_POST['degree_certificate'];
 				$yearGraduation = $_POST['year_graduation'];
-				$usmleDesignation = $_POST['usmle_designation'];
+				$usmleDetail = $_POST['usmle_detail'];
 				$ecfmgCertificate = $_FILES['ecfmg_certificate'];
-				$soi = $_POST['soi'];
+				$specialityOfIntrest = $_POST['speciality_of_instrest'];
 				$photo = $_FILES['photo'];
-				$designation = $_POST['designation'];
-				$landline_number = $_POST['landline_number'];
-				$mobile_number = $_POST['mobile_number'];
-				$address = $_POST['address'];
-			}
-			if($_POST['resident']){
-				$name = $_POST['name'];
-				$password = CryptoLib::hash($password, $this->salt);
-				//$password = $_POST['password'];
-				$city = $_POST['city'];
-				$state = $_POST['state'];
-				$speciality = $_POST['speciality'];
-				$residentProgram = $_POST['resident_program'];
-				$npiNumber = $_POST['npi_number'];
-				$academicProfile = $_POST['academic_profile'];
-				$photo = $_FILES['photo'];
-				$service = $_POST['service'];
+				$mobileNumber = $_POST['phone'];
+				$email = $_POST['email'];
+			// }
+		
 
-			}
-
-			$result = $this->dbase->postNewUser($user_id, $name, $designation, $landline_number, $mobile_number, $email, $address, $password);
+			$result = $this->dbase->postNewUser($name, $city, $state, $country, $password, $medicalSchool, $degreeCertificate, $yearGraduation,$usmleDetail,$ecfmgCertificate,$specialityOfIntrest,$photo,$mobileNumber,$email);
+			// var_dump($result);exit;
 
 			if($result['responseType'] === '1') {
-				$user_id = $result['text'][0]['user_id'];
-				if(!empty($_POST['roles'])) {
-					// Prevent admin users who dont have super admin rights to grant roles like super admin, admin, editor, user manager and schemes administrator to any user
-					if(!$_SESSION['super_admin']){
-						if(($key = array_search(16, $_POST['roles'])) !== false || ($key = array_search(18, $_POST['roles'])) !== false || ($key = array_search(19, $_POST['roles'])) !== false || ($key = array_search(20, $_POST['roles'])) !== false || ($key = array_search(21, $_POST['roles'])) !== false) {
-						    unset($_POST['roles'][$key]);
-						}
-					}
-					$result_user_roles = $this->dbase->postNewUserRoles($user_id, $_POST['roles']);
-				}
-
+				
 				// if(!empty($_POST['groups'])) {
 				// 	$result_user_groups = $this->dbase->postNewUserGroups($user_id, $_POST['groups']);
 				// }
 
-				if(!empty($_POST['organizations'])) {
-					if($_POST['organizations'] == null || $_POST['organizations'] == 'select' || $_POST['organizations'] == ''){
-						$_POST['organizations'] =  $_SESSION['org'];
-					}
-					$result_user_organizations = $this->dbase->postNewUserOrganization($user_id, $_POST['organizations']);
-				} else{
-					$result_user_organizations = $this->dbase->postNewUserOrganization($user_id, $_SESSION['org']);
-				}
-
-				$_SESSION['message']['success'] = "<strong>".$user_id."</strong> has been successfully created";
-				$this->redirect("/User/getAdminUsers");
+				//$_SESSION['message']['success'] = "</strong> has been successfully created";
+				$this->redirect("/User/getLogin");
 			} else{
 				$_SESSION['message']['alert'] = "Error: failed creating new user.";
 				$this->redirect($_SERVER['HTTP_REFERER']);

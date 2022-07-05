@@ -15,35 +15,35 @@ class UtilsDBase extends Database
 	}
 	
 	
-	function getLanguageList(){
-		$query = "select * from language_master";
-		$this->db= $this->database->coreConnection();
-		$statement = $this->db->prepare($query);
-		try{
-			$statement->execute();
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$result = $statement->fetchAll();
-			if(sizeof($result) <= 0){
-				$response['responseType'] = '2';
-				$response['text'] = "No data available.";
-			} else{
-				$response['responseType'] = '1';
-				$response['text'] = $result;
-			}
-			return $response;
-		} catch(\PDOException $e) {
-			error_log("Got sql error at line ".__LINE__." in ".__FILE__.". ".$e->getMessage());
-			$response['responseType'] = '-1';
-			$response['text'] = 'Error - query failed';
-			$response['error'] = 'Error - query failed';
-			return $response;
-		} finally {
-			$this->db = null;
-		}
+	// function getLanguageList(){
+	// 	$query = "select * from language_master";
+	// 	$this->db= $this->database->coreConnection();
+	// 	$statement = $this->db->prepare($query);
+	// 	try{
+	// 		$statement->execute();
+	// 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+	// 		$result = $statement->fetchAll();
+	// 		if(sizeof($result) <= 0){
+	// 			$response['responseType'] = '2';
+	// 			$response['text'] = "No data available.";
+	// 		} else{
+	// 			$response['responseType'] = '1';
+	// 			$response['text'] = $result;
+	// 		}
+	// 		return $response;
+	// 	} catch(\PDOException $e) {
+	// 		error_log("Got sql error at line ".__LINE__." in ".__FILE__.". ".$e->getMessage());
+	// 		$response['responseType'] = '-1';
+	// 		$response['text'] = 'Error - query failed';
+	// 		$response['error'] = 'Error - query failed';
+	// 		return $response;
+	// 	} finally {
+	// 		$this->db = null;
+	// 	}
 
-		//$response = $this->database->coreConnection($query);
-		//return $response;
-	}
+	// 	//$response = $this->database->coreConnection($query);
+	// 	//return $response;
+	// }
 	
 	function validateGETPOST($data){
 		return $this->database->validateGETPOST($data);

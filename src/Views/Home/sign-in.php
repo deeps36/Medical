@@ -27,16 +27,16 @@
 		<link href="/html/metronic8/demo2/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<!--Begin::Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= '../../../../../../www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= '/html/www.googletagmanager.com/gtm5445.html?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!--End::Google Tag Manager -->
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" class="bg-body">
 		<!--Begin::Google Tag Manager (noscript) -->
-		<noscript>
+		<!-- <noscript>
 			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-		</noscript>
+		</noscript> -->
 		<!--End::Google Tag Manager (noscript) -->
 		<!--begin::Main-->
 		<!--begin::Root-->
@@ -46,14 +46,14 @@
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
-					<a href="/html/metronic8/demo2/index.html" class="mb-12">
-						<img alt="Logo" src="/images/logo-gsl.png" class="h-40px" /><label><h4>Global Scholars League</h4></label>
+					<a class="mb-12">
+						<img alt="Logo" src="/image/logo-gsl.png" class="h-40px" /><label><h4>Global Scholars League</h4></label>
 					</a>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
 					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/metronic8/demo2/../demo2/index.html" action="#">
+						<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/../../index.php" method = "post" action="/../../index.php">
 							<!--begin::Heading-->
 							<div class="text-center mb-10">
 								<!--begin::Title-->
@@ -61,7 +61,7 @@
 								<!--end::Title-->
 								<!--begin::Link-->
 								<div class="text-gray-400 fw-bold fs-4">New Here? 
-								<a href="/html/metronic8/demo2/authentication/layouts/basic/sign-up.php" class="link-primary fw-bolder">Create an Account</a></div>
+								<a href="/User/getRegister" class="link-primary fw-bolder">Create an Account</a></div>
 								<!--end::Link-->
 							</div>
 							<!--begin::Heading-->
@@ -141,15 +141,20 @@
 		<!--end::Root-->
 		<!--end::Main-->
 		<!--begin::Javascript-->
-		<script>var hostUrl = "../../../assets/index.html";</script>
+		<script>var hostUrl = "/html/metronic8/demo2/assets/index.html";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="../../../assets/plugins/global/plugins.bundle.js"></script>
-		<script src="../../../assets/js/scripts.bundle.js"></script>
+		<script src="/html/metronic8/demo2/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="/html/metronic8/demo2/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="../../../assets/js/custom/authentication/sign-in/general.js"></script>
+		<script src="/html/metronic8/demo2/assets/js/custom/authentication/sign-in/general.js"></script>
 		<!--end::Page Custom Javascript-->
 		<!--end::Javascript-->
+		<script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery.sticky.js"></script>
+        <script src="/js/click-scroll.js"></script>
+        <script src="/js/custom.js"></script>
 	</body>
 	<!--end::Body-->
 </html>

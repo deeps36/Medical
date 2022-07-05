@@ -19,14 +19,14 @@ class UserDBase extends Database
 	}
 
 	
-	public function login($username, $password)
+	public function login($user, $password)
 	{
 		//$query = "select * from user_master um, user_roles_relation ur where (um.name = '".$username. "' or um.user_id = '".$username. "') and password = '".$password."' and  um.user_id=ur.user_id"; // login using user_id or user name
-		$query = "select um.user_id, um.name, um.designation, um.landline_number, um.mob_number, um.email, um.address, um.start_date, um.end_date, um.password, um.default_village, um.regular_login, um.temp_blocked, um.temp_blocked_time, um.create_by, um.super_admin, ur.role_id, org.org_id, orgm.name as orgname from user_master um left join user_roles_relation ur on um.user_id = ur.user_id left join organization_user_relation org on um.user_id = org.user_id left join organization_master orgm on org.org_id = orgm.id where um.user_id = ? and password = ?";
+		$query = "select * from user_master where email_id = ? and password = ?";
 		
 		$this->db= $this->database->coreConnection();
 		$statement = $this->db->prepare($query);
-		$statement->bindParam(1, $username, \PDO::PARAM_STR);
+		$statement->bindParam(1, $user, \PDO::PARAM_STR);
 		$statement->bindParam(2, $password, \PDO::PARAM_STR);
 		try{
 			$statement->execute();
@@ -644,30 +644,37 @@ class UserDBase extends Database
 		}
 	}
 
-	function postNewUser($user_id, $name, $designation, $landline_number, $mobile_number, $email, $address, $password) {
+	function postNewUser($name, $city, $state, $country, $password, $medicalSchool, $degreeCertificate, $yearGraduation,$usmleDetail,$ecfmgCertificate,$specialityOfIntrest,$photo,$mobileNumber,$email) {
 
-		$query = "insert into user_master (user_id, name, designation, landline_number, mob_number, email, address, start_date, password, create_by) values (?, ?, ?, ?, ?, ?, ?, date(now()), ?,  '".$_SESSION['userid']."')  RETURNING user_id";
+		$query = "insert into user_master (user_id,full_name,city,state,country,password,medical_school,degree_certificate,year_of_graduation,usmle_details,ecfmg_certification,speciality_of_intrest,create_date,update_date,mobile_no,email_id,photo) values ('tests',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$this->db = $this->database->coreConnection();
 		$statement = $this->db->prepare($query);
-		$statement->bindParam(1, $user_id, \PDO::PARAM_STR);
-		$statement->bindParam(2, $name, \PDO::PARAM_STR);
-		$statement->bindParam(3, $designation, \PDO::PARAM_STR);
-		$statement->bindParam(4, intval($landline_number), \PDO::PARAM_INT);
-		$statement->bindParam(5, intval($mobile_number), \PDO::PARAM_INT);
-		$statement->bindParam(6, $email, \PDO::PARAM_STR);
-		$statement->bindParam(7, $address, \PDO::PARAM_STR);
-		$statement->bindParam(8, $password, \PDO::PARAM_STR);
+		$statement->bindParam(1, $name, \PDO::PARAM_STR);
+		$statement->bindParam(2, $city, \PDO::PARAM_STR);
+		$statement->bindParam(3, $state, \PDO::PARAM_STR);
+		$statement->bindParam(4, $country, \PDO::PARAM_STR);
+		$statement->bindParam(5, $password, \PDO::PARAM_STR);
+		$statement->bindParam(6, $medicalSchool, \PDO::PARAM_STR);	
+		$statement->bindParam(7, $degreeCertificate, \PDO::PARAM_STR);
+		$statement->bindParam(8, $yearGraduation, \PDO::PARAM_STR);
+		$statement->bindParam(9, $usmleDetail, \PDO::PARAM_STR);
+		$statement->bindParam(10, $ecfmgCertificate, \PDO::PARAM_LOB);
+		$statement->bindParam(11, $specialityOfIntrest, \PDO::PARAM_STR);
+		$statement->bindParam(12, date("Y-m-d H:i:s"), \PDO::PARAM_STR);
+		$statement->bindParam(13, date("Y-m-d H:i:s"), \PDO::PARAM_STR);
+		$statement->bindParam(14, $mobileNumber, \PDO::PARAM_STR);
+		$statement->bindParam(15, $email, \PDO::PARAM_STR);
+		$statement->bindParam(16, $photo, \PDO::PARAM_LOB);
 		try{
 			$statement->execute();
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$result = $statement->rowCount();
-			$data = $statement->fetchAll();
 			if($result <= 0 ){
 				$response['responseType'] = '2';
-				$response['text'] = "No data affected.";
+				$response['text'] = "No data available.";
 			} else{
 				$response['responseType'] = '1';
-				$response['text'] = $data;
+				$response['text'] = $result." row(s) affected.";
 			}
 			return $response;
 		} catch(\PDOException $e) {

@@ -38,8 +38,8 @@ class GeetMain
     		$this->__sessionLifeTime();
     		$this->__requestValidation();
     	}
-		$this->__access();
-		$this->__language();
+		//$this->__access();
+		//$this->__language();
 		if(isset($_POST)){
 			$_POST = $this->utils_dbase->validateGETPOST($_POST);
 		} elseif(isset($_GET)){
@@ -110,112 +110,112 @@ class GeetMain
 		}
 	}
 
-	private function __access()
-	{
-		$uri = explode('/', $_SERVER['REQUEST_URI']);
-		$classAndAction = $_SESSION['class'].".".$_SESSION['method'];
-		if(!isset($_SESSION['admin'])){
-			$policies = $this->user_dbase->getUserSpecificAccessPolicy("1"); // 1 is for public users
-			if($policies['responseType'] == 1){
-				$policyArray = array();
-				foreach($policies['text'] as $row){
-					array_push($policyArray, $row['accesspolicy']);
-				}
-				$_SESSION['access_policy'] = explode(",",implode(",",$policyArray)); 
-				if(!in_array($classAndAction, $_SESSION['access_policy']) && $classAndAction !== "."  && $classAndAction !== "GeetMain.home" && !isset($_REQUEST['mobile'])){
-					//$uri = explode('/', $_SERVER['REQUEST_URI']);
-					$classAndAction = $_SESSION['class'].".".$_SESSION['method'];
-					$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
-					$this->home(true);
-				}				
-			}
-		} else{
-			if($_SESSION['sessionID'] !== session_id() || $_SESSION['clientIP'] !== $_SERVER['REMOTE_ADDR']){
-				$this->destroySession();
-				$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
-				$this->redirect("/#login");
-				exit;
-			}
-			$roles = $this->user_dbase->getRole($_SESSION['userid']);
-			if($roles['responseType'] == 1)
-			{
-				$roleIds = array();
-				foreach($roles['text'] as $rowElement){
-					array_push($roleIds,$rowElement['role_id']);
-				}
-			}
-			$allRoles = implode(",",$roleIds);
-			$policies = $this->user_dbase->getUserSpecificAccessPolicy($allRoles);
-			if($policies['responseType'] == 1)
-			{
-				$policyArray = array();
-				foreach($policies['text'] as $row){
-					array_push($policyArray, $row['accesspolicy']);
-				}
-				$_SESSION['access_policy'] = explode(",",implode(",",$policyArray));
+	// private function __access()
+	// {
+	// 	$uri = explode('/', $_SERVER['REQUEST_URI']);
+	// 	$classAndAction = $_SESSION['class'].".".$_SESSION['method'];
+	// 	if(!isset($_SESSION['admin'])){
+	// 		$policies = $this->user_dbase->getUserSpecificAccessPolicy("1"); // 1 is for public users
+	// 		if($policies['responseType'] == 1){
+	// 			$policyArray = array();
+	// 			foreach($policies['text'] as $row){
+	// 				array_push($policyArray, $row['accesspolicy']);
+	// 			}
+	// 			$_SESSION['access_policy'] = explode(",",implode(",",$policyArray)); 
+	// 			if(!in_array($classAndAction, $_SESSION['access_policy']) && $classAndAction !== "."  && $classAndAction !== "GeetMain.home" && !isset($_REQUEST['mobile'])){
+	// 				//$uri = explode('/', $_SERVER['REQUEST_URI']);
+	// 				$classAndAction = $_SESSION['class'].".".$_SESSION['method'];
+	// 				$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
+	// 				$this->home(true);
+	// 			}				
+	// 		}
+	// 	} else{
+	// 		if($_SESSION['sessionID'] !== session_id() || $_SESSION['clientIP'] !== $_SERVER['REMOTE_ADDR']){
+	// 			$this->destroySession();
+	// 			$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
+	// 			$this->redirect("/#login");
+	// 			exit;
+	// 		}
+	// 		$roles = $this->user_dbase->getRole($_SESSION['userid']);
+	// 		if($roles['responseType'] == 1)
+	// 		{
+	// 			$roleIds = array();
+	// 			foreach($roles['text'] as $rowElement){
+	// 				array_push($roleIds,$rowElement['role_id']);
+	// 			}
+	// 		}
+	// 		$allRoles = implode(",",$roleIds);
+	// 		$policies = $this->user_dbase->getUserSpecificAccessPolicy($allRoles);
+	// 		if($policies['responseType'] == 1)
+	// 		{
+	// 			$policyArray = array();
+	// 			foreach($policies['text'] as $row){
+	// 				array_push($policyArray, $row['accesspolicy']);
+	// 			}
+	// 			$_SESSION['access_policy'] = explode(",",implode(",",$policyArray));
 
-				//Dedined access if requested action of class is absent in $_SESSION['access_policy']
-				if(!in_array($classAndAction, $_SESSION['access_policy']) && $classAndAction != '.' && $classAndAction !== "GeetMain.home"){
+	// 			//Dedined access if requested action of class is absent in $_SESSION['access_policy']
+	// 			if(!in_array($classAndAction, $_SESSION['access_policy']) && $classAndAction != '.' && $classAndAction !== "GeetMain.home"){
 
-					$this->user_dbase->addUserPerformedActions($_SESSION['userid'], $_SERVER['REQUEST_URI'], 'Failed - Access denied', json_encode($_REQUEST), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
+	// 				$this->user_dbase->addUserPerformedActions($_SESSION['userid'], $_SERVER['REQUEST_URI'], 'Failed - Access denied', json_encode($_REQUEST), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
 
-					$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
-					$this->home(true);
-				}
+	// 				$_SESSION['message']['warning'] = '<b>Access denied:</b> You are not authorised to acces '.$_SERVER['REQUEST_URI'];
+	// 				$this->home(true);
+	// 			}
 
-				$parametersSubmitted = json_encode($_REQUEST);
-				$this->user_dbase->addUserPerformedActions($_SESSION['userid'], $_SERVER['REQUEST_URI'], 'Success', $parametersSubmitted, $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
+	// 			$parametersSubmitted = json_encode($_REQUEST);
+	// 			$this->user_dbase->addUserPerformedActions($_SESSION['userid'], $_SERVER['REQUEST_URI'], 'Success', $parametersSubmitted, $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
 
-				// Get page links based on page access for admin panel 
-				$pagePolicies = $this->user_dbase->getAllPages();
-				if($pagePolicies['responseType'] == 1){
-					$pageAccess = array();
-					$j=0;
-					foreach($pagePolicies['text'] as $category){
-						$page_id = explode(" delimit ", $category['page_id']);
-						$page_name = explode(" delimit ", $category['page_name']);
-						$page_link = explode(" delimit ", $category['page_link']);
-						$pageLinkTemp = $page_link;
-						$pages = array();
-						$k=0;
-						for($i=0;$i<sizeof($page_id);$i++){
-							$temp = explode("/", $page_link[$i]);
-							if(in_array($temp[1].".".$temp[2], $_SESSION['access_policy'])){
-								$pages['page_id'][$k] = $page_id[$i];
-								$pages['page_name'][$k] = $page_name[$i];
-								$pages['page_link'][$k] = $page_link[$i];
-								$k++;
-							}
-						}
-						if(isset($pages['page_id'])){
-							if(sizeof($pages['page_id'])>0){
-								$pageAccess[$j]['page_id'] = implode(" delimit ", $pages['page_id']);
-								$pageAccess[$j]['page_name'] = implode(" delimit ", $pages['page_name']);
-								$pageAccess[$j]['page_link'] = implode(" delimit ", $pages['page_link']);
-								$pageAccess[$j]['page_category_id'] = $category['page_category_id'];
-								$pageAccess[$j]['page_category_name'] = $category['page_category_name'];
-								$j++;
-							}
-						}
-					}
-					$_SESSION['page_policy'] = $pageAccess;
-				}
-			} else{
-				$_SESSION['message']['warning'] = 'Error: Coudnt fetch access information.';
-			}
-		}
-	}
+	// 			// Get page links based on page access for admin panel 
+	// 			$pagePolicies = $this->user_dbase->getAllPages();
+	// 			if($pagePolicies['responseType'] == 1){
+	// 				$pageAccess = array();
+	// 				$j=0;
+	// 				foreach($pagePolicies['text'] as $category){
+	// 					$page_id = explode(" delimit ", $category['page_id']);
+	// 					$page_name = explode(" delimit ", $category['page_name']);
+	// 					$page_link = explode(" delimit ", $category['page_link']);
+	// 					$pageLinkTemp = $page_link;
+	// 					$pages = array();
+	// 					$k=0;
+	// 					for($i=0;$i<sizeof($page_id);$i++){
+	// 						$temp = explode("/", $page_link[$i]);
+	// 						if(in_array($temp[1].".".$temp[2], $_SESSION['access_policy'])){
+	// 							$pages['page_id'][$k] = $page_id[$i];
+	// 							$pages['page_name'][$k] = $page_name[$i];
+	// 							$pages['page_link'][$k] = $page_link[$i];
+	// 							$k++;
+	// 						}
+	// 					}
+	// 					if(isset($pages['page_id'])){
+	// 						if(sizeof($pages['page_id'])>0){
+	// 							$pageAccess[$j]['page_id'] = implode(" delimit ", $pages['page_id']);
+	// 							$pageAccess[$j]['page_name'] = implode(" delimit ", $pages['page_name']);
+	// 							$pageAccess[$j]['page_link'] = implode(" delimit ", $pages['page_link']);
+	// 							$pageAccess[$j]['page_category_id'] = $category['page_category_id'];
+	// 							$pageAccess[$j]['page_category_name'] = $category['page_category_name'];
+	// 							$j++;
+	// 						}
+	// 					}
+	// 				}
+	// 				$_SESSION['page_policy'] = $pageAccess;
+	// 			}
+	// 		} else{
+	// 			$_SESSION['message']['warning'] = 'Error: Coudnt fetch access information.';
+	// 		}
+	// 	}
+	// }
 	
-	function __language(){
-		$_SESSION['language']['id'] = $_SESSION['language']['name'] = array();
-		$languages = $this->utils_dbase->getLanguageList();
-		if($languages['responseType'] === '1'){
-			foreach($languages['text'] as $lang){
-				array_push($_SESSION['language']['id'], $lang['id']);
-				array_push($_SESSION['language']['name'], $lang['name']);
-			}
-		}
-	}
+	// function __language(){
+	// 	$_SESSION['language']['id'] = $_SESSION['language']['name'] = array();
+	// 	$languages = $this->utils_dbase->getLanguageList();
+	// 	if($languages['responseType'] === '1'){
+	// 		foreach($languages['text'] as $lang){
+	// 			array_push($_SESSION['language']['id'], $lang['id']);
+	// 			array_push($_SESSION['language']['name'], $lang['name']);
+	// 		}
+	// 	}
+	// }
 
 	function home($var = false)
 	{	
